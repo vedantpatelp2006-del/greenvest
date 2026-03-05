@@ -20,7 +20,7 @@ pipeline {
     steps {
         bat """
         copy /Y .env.example .env
-        "%PHP_PATH%" artisan key:generate --force
+        "C:\\Users\\MB540WS\\.config\\herd-lite\\bin\\php.exe" artisan key:generate --force
         """
     }
 }
