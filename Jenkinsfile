@@ -7,56 +7,25 @@ pipeline {
         LOCAL_DEPLOYPATH = 'C:\\Vedant\\Git\\greenvest'
     }
 
-    stages {
-        stage('Checkout') {
+stages {
+        stage('Debug Workspace') {
             steps {
-                git branch: 'main',
-                    credentialsId: 'github-vedant',
-                    url: 'https://github.com/vedantpatelp2006-del/greenvest'
+                bat 'dir composer.json'           // Verify
+                bat 'dir vendor || echo NO VENDOR'
+                bat 'echo PHP: %PHP_PATH%'
             }
         }
-
-      stage('Environment') {
-    steps {
-        bat """
-        copy /Y .env.example .env
-        "C:\\Users\\MB540WS\\.config\\herd-lite\\bin\\php.exe" artisan key:generate --force
-        """
-    }
-}
-
-
-        stage('Test DB') {
+        stage('Composer Install') {           // CRITICAL
             steps {
-                bat """
-                if exist database\\database.sqlite del database\\database.sqlite
-                "%PHP_PATH%" artisan migrate:fresh --seed
-                """
+                bat 'if not exist vendor "%COMPOSER_PATH%" install --no-progress --no-interaction --no-dev'
+                bat 'dir vendor/autoload.php || exit /b 1'  // Fail if missing
             }
         }
-
         stage('Test') {
             steps {
-                bat "\"%PHP_PATH%\" artisan test"
+                bat '"%PHP_PATH%" artisan --version'  // Uses autoload
             }
         }
-
-        stage('Deploy Local') {
-            steps {
-                bat """
-                    if exist exclude.txt (
-                        xcopy /E /I /Y /H . "%LOCAL_DEPLOYPATH%" /exclude:exclude.txt
-                    ) else (
-                        xcopy /E /I /Y /H . "%LOCAL_DEPLOYPATH%"
-                    )
-                """
-
-
-            }
         }
-
-
-    }
-
 
 }
