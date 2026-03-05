@@ -16,17 +16,6 @@ pipeline {
             }
         }
 
-        stage('Dependencies') {
-            steps {
-                // Verify composer.json exists in workspace
-                bat 'dir composer.json'         
-                
-                // Install PHP dependencies -> creates vendor/autoload.php
-                bat "%COMPOSER_PATH% install --no-progress --no-interaction"
-                
-            }
-        }
-
       stage('Environment') {
     steps {
         bat """
