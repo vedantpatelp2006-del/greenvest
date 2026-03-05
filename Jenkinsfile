@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        PHP_PATH       = 'C:\\\\Users\\\\MB540WS\\\\.config\\\\herd-lite\\\\bin\\\\php.exe'
-        COMPOSER_PATH  = 'C:\\\\Users\\\\MB540WS\\\\.config\\\\herd-lite\\\\bin\\\\composer.bat'
-        LOCAL_DEPLOYPATH = 'C:\\\\Vedant\\\\Git\\\\greenvest'
+        PHP_PATH       = 'C:\\Users\\MB540WS\\.config\\herd-lite\\bin\\php.exe'
+        COMPOSER_PATH  = 'C:\\Users\\MB540WS\\.config\\herd-lite\\bin\\composer.bat'
+        LOCAL_DEPLOYPATH = 'C:\\Vedant\\Git\\greenvest'
     }
 
     stages {
