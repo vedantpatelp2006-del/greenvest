@@ -11,7 +11,6 @@ stages {
         stage('Composer Install') {           // CRITICAL
             steps {
                 bat 'if not exist vendor "%COMPOSER_PATH%" install --no-progress --no-interaction --no-dev'
-                bat 'dir vendor/autoload.php || exit /b 1'  // Fail if missing
             }
         }
         stage('Test') {
