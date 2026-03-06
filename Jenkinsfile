@@ -8,13 +8,6 @@ pipeline {
     }
 
 stages {
-        stage('Debug Workspace') {
-            steps {
-                bat 'dir composer.json'           // Verify
-                bat 'dir vendor || echo NO VENDOR'
-                bat 'echo PHP: %PHP_PATH%'
-            }
-        }
         stage('Composer Install') {           // CRITICAL
             steps {
                 bat 'if not exist vendor "%COMPOSER_PATH%" install --no-progress --no-interaction --no-dev'
