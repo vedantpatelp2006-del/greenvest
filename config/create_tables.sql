@@ -1,0 +1,31 @@
+CREATE TABLE users(
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100),
+email VARCHAR(100),
+password VARCHAR(255),
+role VARCHAR(20)
+);
+
+CREATE TABLE clients(
+id INT AUTO_INCREMENT PRIMARY KEY,
+advisor_id INT,
+name VARCHAR(100),
+email VARCHAR(100),
+risk_level VARCHAR(50)
+);
+
+CREATE TABLE portfolios(
+id INT AUTO_INCREMENT PRIMARY KEY,
+client_id INT,
+investment_type VARCHAR(100),
+amount DECIMAL(10,2),
+performance DECIMAL(10,2)
+);
+
+CREATE TABLE messages(
+id INT AUTO_INCREMENT PRIMARY KEY,
+sender_id INT,
+receiver_id INT,
+message TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
